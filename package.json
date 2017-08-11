@@ -1,7 +1,7 @@
 {
   "name": "telegram-community-moderation-bot",
   "version": "0.0.1",
-  "description": "Telegram Bot which automagically moderates public groups and channels by letting random users approved newly posted messages.",
+  "description": "Telegram Bot which automagically moderates public groups and channels by letting random users approve newly posted messages.",
   "main": "./main.js",
   "directories": {
     "log": "log",
