@@ -24,6 +24,17 @@ const bot = new Tgfancy(token,
     },
 });
 
+// file system
+
+
+// FUNCTIONS
+
+// log user interactions to ./log/userinteractions.log
+var fs = require('fs');
+var logIt = function(msg, ev) {
+  fs.appendFileSync('./log/userinteractions.log', new Date().toLocaleString() + " - " + msg.chat.id + " - " + ev + " - usr: [" + msg.from.first_name + "]\n");
+};
+
 
 // CODE
 bot.on('message', (msg) => {
@@ -31,15 +42,25 @@ bot.on('message', (msg) => {
   var Hi = "hi";
   if (msg.text.toLowerCase().indexOf(Hi) === 0) {
     bot.sendMessage(msg.chat.id, ":wave: Hi " + msg.from.first_name + "! How are you doing?");
-    console.log(new Date().toLocaleString() + ": Sent a hello message to the user " + msg.from.first_name);
+    logIt(msg, "hi");
   }
   // bye message if a users sends a message which includes "bye"
   var bye = "bye";
   if (msg.text.toLowerCase().includes(bye)) {
     bot.sendMessage(msg.chat.id, "Hope to see you back again soon...");
   }
-  // under development notification on /start
-  bot.onText(/\/start/, (msg) => {
-    bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\n:warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning:\nThis bot is still under development and not ready to use for the public.\n\n:mega: Join @CommunityModerationBotNews for development announcements and keep moderating your group/ channel by hand. :cry:\n\nCheers,\n@rogersc");
-  });
+});
+// under development notification on /start
+bot.onText(/\/start/, (msg) => {
+  bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\n:warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning:\nThis bot is still under heavy development and not ready to be used by the public.\n\n:mega: Join @CommunityModerationBotNews for development announcements and keep moderating your group/ channel by hand. :cry:\n\nIn the meantime join our discussion group :busts_in_silhouette: @CommunityModerationBotGroup and start chatting about group moderation.\n\nCheers,\n@rogersc");
+  logIt(msg, "/start");
+});
+// /help message
+bot.onText(/\/help/, (msg) => {
+  bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\nIf you need help with your copy of the bot, *join our discussion group* :busts_in_silhouette: @CommunityModerationBotGroup and start chatting or *subscribe to our channel* :mega: @CommunityModerationBotNews for official announcements and tutorials. \n\nCheers,\n@rogersc", {parse_mode : "MARKDOWN"});
+  logIt(msg, "/help");
+});
+bot.onText(/\/settings/, (msg) => {
+  bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\n*404 is real!* This bot is not yet ready to be set up. In the meantime *join our discussion group* :busts_in_silhouette: @CommunityModerationBotGroup and start chatting or *subscribe to our channel* :mega: @CommunityModerationBotNews for official announcements and tutorials. \n\nCheers,\n@rogersc", {parse_mode : "MARKDOWN"});
+  logIt(msg, "/settings");
 });
