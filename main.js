@@ -11,15 +11,27 @@ const TelegramBot = require('node-telegram-bot-api');
 ** real bot token there as explained
 */
 const token = init.getToken();
-const bot = new TelegramBot(token, { polling: true });
+//const bot = new TelegramBot(token, { polling: true });
+const Tgfancy = require("tgfancy");
+const bot = new Tgfancy(token,
+  {
+    // enable status update polling
+    polling: true,
+    // all options to 'tgfancy' MUST be placed under the
+    // 'tgfancy' key, as shown below
+    tgfancy: {
+        emojification: true,
+    },
+});
+
 
 // CODE
 bot.on('message', (msg) => {
   // Hello Greeting if a user sends the message "hi"
   var Hi = "hi";
   if (msg.text.toLowerCase().indexOf(Hi) === 0) {
-    bot.sendMessage(msg.chat.id, "Hi " + msg.from.first_name);
-    console.log("Sent a hello message to the user " + msg.from.first_name);
+    bot.sendMessage(msg.chat.id, ":wave: Hi " + msg.from.first_name + "! How are you doing?");
+    console.log(new Date().toLocaleString() + ": Sent a hello message to the user " + msg.from.first_name);
   }
   // bye message if a users sends a message which includes "bye"
   var bye = "bye";
@@ -28,6 +40,6 @@ bot.on('message', (msg) => {
   }
   // under development notification on /start
   bot.onText(/\/start/, (msg) => {
-    bot.sendMessage(msg.from.id, "Hello " + msg.from.first_name + "\n\nThis bot is still under development and not ready to use for the public.\n\nJoin @CommunityModerationBotNews for development announcements and keep moderating your group/ channel by hand.\n\nCheers,\n@rogersc");
+    bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\n:warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning:\nThis bot is still under development and not ready to use for the public.\n\n:mega: Join @CommunityModerationBotNews for development announcements and keep moderating your group/ channel by hand. :cry:\n\nCheers,\n@rogersc");
   });
 });
