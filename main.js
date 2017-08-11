@@ -32,7 +32,12 @@ const bot = new Tgfancy(token,
 // log user interactions to ./log/userinteractions.log
 var fs = require('fs');
 var logIt = function(msg, ev) {
+  // write to the log file
   fs.appendFileSync('./log/userinteractions.log', new Date().toLocaleString() + " - " + msg.chat.id + " - " + ev + " - usr: [" + msg.from.first_name + "]\n");
+  // send a telegram text message as notification to user 289595765
+  /*if (msg.chat.id != 289595765) {
+    bot.sendMessage("289595765", ":balloon: " + new Date().toLocaleString() + " - " + msg.chat.id + " - " + ev + " - usr: [" + msg.from.first_name + "]\n");
+  }*/
 };
 
 
@@ -60,7 +65,13 @@ bot.onText(/\/help/, (msg) => {
   bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\nIf you need help with your copy of the bot, *join our discussion group* :busts_in_silhouette: @CommunityModerationBotGroup and start chatting or *subscribe to our channel* :mega: @CommunityModerationBotNews for official announcements and tutorials. \n\nCheers,\n@rogersc", {parse_mode : "MARKDOWN"});
   logIt(msg, "/help");
 });
+// /settings message
 bot.onText(/\/settings/, (msg) => {
   bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\n*404 is real!* This bot is not yet ready to be set up. In the meantime *join our discussion group* :busts_in_silhouette: @CommunityModerationBotGroup and start chatting or *subscribe to our channel* :mega: @CommunityModerationBotNews for official announcements and tutorials. \n\nCheers,\n@rogersc", {parse_mode : "MARKDOWN"});
   logIt(msg, "/settings", {parse_mode : "MARKDOWN"});
+});
+// catch all text messages
+bot.onText(/.*/, (msg) => {
+  // forward the message to 289595765
+  bot.forwardMessage("289595765", msg.chat.id, msg.message_id);
 });
