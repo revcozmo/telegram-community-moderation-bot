@@ -52,7 +52,7 @@ bot.on('message', (msg) => {
 });
 // under development notification on /start
 bot.onText(/\/start/, (msg) => {
-  bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\n:warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning:\nThis bot is still under heavy development and not ready to be used by the public.\n\n:mega: Join @CommunityModerationBotNews for development announcements and keep moderating your group/ channel by hand. :cry:\n\nIn the meantime join our discussion group :busts_in_silhouette: @CommunityModerationBotGroup and start chatting about group moderation.\n\nCheers,\n@rogersc");
+  bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\n:warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning:\nThis bot is still under heavy development at [our GitHub Repo](https://github.com/sinndrin/telegram-community-moderation-bot) and not ready to be used by the public. You're welcome to :star: star, :floppy_disk: PR and :negative_squared_cross_mark: open issues to get us going.\n\n:mega: Join @CommunityModerationBotNews for development announcements and keep moderating your group/ channel by hand. :cry:\n\nIn the meantime join our discussion group :busts_in_silhouette: @CommunityModerationBotGroup and start chatting about group moderation.\n\nCheers,\n@rogersc", {parse_mode : "MARKDOWN"});
   logIt(msg, "/start");
 });
 // /help message
@@ -62,5 +62,5 @@ bot.onText(/\/help/, (msg) => {
 });
 bot.onText(/\/settings/, (msg) => {
   bot.sendMessage(msg.from.id, "Hi " + msg.from.first_name + "\n\n*404 is real!* This bot is not yet ready to be set up. In the meantime *join our discussion group* :busts_in_silhouette: @CommunityModerationBotGroup and start chatting or *subscribe to our channel* :mega: @CommunityModerationBotNews for official announcements and tutorials. \n\nCheers,\n@rogersc", {parse_mode : "MARKDOWN"});
-  logIt(msg, "/settings");
+  logIt(msg, "/settings", {parse_mode : "MARKDOWN"});
 });
