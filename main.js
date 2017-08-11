@@ -15,15 +15,18 @@ const bot = new TelegramBot(token, { polling: true });
 
 // CODE
 bot.on('message', (msg) => {
+  // Hello Greeting if a user sends the message "hi"
   var Hi = "hi";
   if (msg.text.toLowerCase().indexOf(Hi) === 0) {
-    bot.sendMessage(msg.chat.id, "Hello dear user");
+    bot.sendMessage(msg.chat.id, "Hi " + msg.from.first_name);
     console.log("Sent a hello message to the user " + msg.from.first_name);
   }
+  // bye message if a users sends a message which includes "bye"
   var bye = "bye";
   if (msg.text.toLowerCase().includes(bye)) {
-    bot.sendMessage(msg.chat.id, "Hope to see you around again , Bye");
+    bot.sendMessage(msg.chat.id, "Hope to see you back again soon...");
   }
+  // under development notification on /start
   bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.from.id, "Hello " + msg.from.first_name + "\n\nThis bot is still under development and not ready to use for the public.\n\nJoin @CommunityModerationBotNews for development announcements and keep moderating your group/ channel by hand.\n\nCheers,\n@rogersc");
   });
