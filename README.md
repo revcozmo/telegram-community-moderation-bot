@@ -1,6 +1,4 @@
-# Warning
-
-:warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning: :construction: :warning:
+# :warning: Warning :construction:
 
 This bot is still under heavy development and not ready to be used by the public.
 
