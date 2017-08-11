@@ -1,6 +1,7 @@
 // initialisation of the bot
 var init = require("./init");
 
+// TODO: add node-telegram-bot-api to install dependencies
 const TelegramBot = require('node-telegram-bot-api');
 /*
 ** get the telegram token which looks something
@@ -12,6 +13,7 @@ const TelegramBot = require('node-telegram-bot-api');
 */
 const token = init.getToken();
 //const bot = new TelegramBot(token, { polling: true });
+// TODO: add tgfancy to install dependencies
 const Tgfancy = require("tgfancy");
 const bot = new Tgfancy(token,
   {
